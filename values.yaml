@@ -1,0 +1,31 @@
+#
+# Remember not to commit actual secrets in the values.yaml file for production
+# Instead, execute the command below to set secrets at installation time
+# $ helm install my-release server-chart --set secret.api_key=my-secret-api-key
+#
+replicaCount: 3
+
+image:
+  repository: dimasyudha/server
+  tag: "0.0.1"
+
+configMap:
+  name: server-config-pc6a
+  dns_server: https://server.dimasyudha.tech
+
+autoscaler:
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilization: 80
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "200m"
+    memory: "256Mi"
+
+secret:
+  name: my-secret
+  api_key: "my-secret-api-key"

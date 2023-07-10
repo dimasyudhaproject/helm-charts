@@ -1,0 +1,9 @@
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "{{ .Values.configMap.name }}"
+  namespace: "app"
+  labels:
+    app: "server"
+data:
+  DNS_SERVER: "{{ .Values.configMap.dns_server }}"

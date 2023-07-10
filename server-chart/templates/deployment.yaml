@@ -1,0 +1,46 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "server"
+  namespace: "app"
+  labels:
+    app: "server"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "server"
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: "server"
+    spec:
+      containers:
+      - name: "server-1"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        env:
+        - name: "DNS_SERVER"
+          valueFrom:
+            configMapKeyRef:
+              key: "DNS_SERVER"
+              name: "{{ .Values.configMap.name }}"
+        livenessProbe:
+          httpGet:
+            path: your-actual-health-check-endpoint
+            port: http
+        readinessProbe:
+          httpGet:
+            path: your-actual-health-check-endpoint
+            port: http
