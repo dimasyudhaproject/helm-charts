@@ -21,7 +21,7 @@ spec:
         app: "server"
     spec:
       containers:
-      - name: "server-1"
+      - name: "server"
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         resources:
           requests:

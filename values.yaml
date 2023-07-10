@@ -29,3 +29,6 @@ resources:
 secret:
   name: my-secret
   api_key: "my-secret-api-key"
+
+ingress:
+  host: "server.dimasyudha.tech"
