@@ -33,7 +33,7 @@ helm install server ./chart
 
 ## Configuration
 
-The following table lists the configurable parameters of the server chart and their default values.
+The following table lists the configurable parameters of the chart and their default values.
 
 | Parameter                                      | Description                                                  | Default              |
 |------------------------------------------------|--------------------------------------------------------------|----------------------|
@@ -49,3 +49,16 @@ The following table lists the configurable parameters of the server chart and th
 | `ingress.annotations`                          | Ingress annotations for additional configuration             | `{}`                 |
 | `ingress.hosts`                                | Ingress accepted hostnames                                   | `chart-example.local`|
 | `ingress.tls`                                  | Ingress TLS configuration                                    | `[]`                 |
+
+## Production Considerations
+
+For a production environment, consider adjusting the following parameters:
+
+| Parameter                                   | Consideration                                                                               |
+|---------------------------------------------|---------------------------------------------------------------------------------------------|
+| `image.tag`                                 | Use a specific version of your server image, not `latest`.                                  |
+| `replicaCount`                              | Increase this for more redundancy.                                                          |
+| `autoscaling.minReplicas`                   | Increase this based on your load requirements.                                              |
+| `autoscaling.maxReplicas`                   | Increase this based on your load requirements.                                              |
+| `autoscaling.targetCPUUtilizationPercentage`| Adjust according to the workload. A higher percentage means the autoscaler will kick in later|
+| `ingress.enabled`                           | Should be set to `true` to enable exposure of the service outside of the cluster.            |
