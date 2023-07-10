@@ -30,3 +30,22 @@ git clone https://github.com/dimasyudhatech/Helm-charts.git
 # Install the Helm Chart
 helm install server ./chart
 ```
+
+## Configuration
+
+The following table lists the configurable parameters of the server chart and their default values.
+
+| Parameter                                      | Description                                                  | Default              |
+|------------------------------------------------|--------------------------------------------------------------|----------------------|
+| `image.repository`                             | Server image repository                                      | `nginx`              |
+| `image.tag`                                    | Server image tag                                             | `latest`             |
+| `image.pullPolicy`                             | Server image pull policy                                     | `IfNotPresent`       |
+| `replicaCount`                                 | Desired number of server pods                                | `1`                  |
+| `autoscaling.enabled`                          | Enables Kubernetes horizontal pod autoscaler                 | `false`              |
+| `autoscaling.minReplicas`                      | Minimum number of server pods                                | `1`                  |
+| `autoscaling.maxReplicas`                      | Maximum number of server pods                                | `100`                |
+| `autoscaling.targetCPUUtilizationPercentage`   | Target CPU utilization for autoscaling                       | `80`                 |
+| `ingress.enabled`                              | Enables Ingress for server                                   | `false`              |
+| `ingress.annotations`                          | Ingress annotations for additional configuration             | `{}`                 |
+| `ingress.hosts`                                | Ingress accepted hostnames                                   | `chart-example.local`|
+| `ingress.tls`                                  | Ingress TLS configuration                                    | `[]`                 |
